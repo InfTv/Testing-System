@@ -73,6 +73,8 @@ public:
             if (verification != password)
             {
                 cout << " Пароли не совпадают! Повторите попытку:\n > ";
+                Sleep(2000);
+                system("cls");
             }
         } while (verification != password);
         Sleep(1000);
@@ -85,28 +87,32 @@ public:
         Sleep(1000);
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Здравствуйте!\n";
         Sleep(2000);
-        cout << "\n\t\t\t\t\t\t    Вход в систему\n";
+        cout << "\t\t\t\t\t\t    Вход в систему\n";
         Sleep(3000);
         system("cls");
-        cout << "\n    Пожалуйста, введите Ваш логин: \n > ";
-        string userCheck;
-        getline(cin, userCheck);
-        cout << "    Отлично! А теперь введите пароль \n > ";
-        string passwordCheck;
-        getline(cin, passwordCheck);
 
         bool check;
         do
         {
+            cout << "\n    Пожалуйста, введите Ваш логин: \n > ";
+            string userCheck;
+            getline(cin, userCheck);
+            cout << "    Отлично! А теперь введите пароль \n > ";
+            string passwordCheck;
+            getline(cin, passwordCheck);
+            Sleep(1000);
+
             if (userCheck == user && passwordCheck == password)
             {
-                cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t    Поздравляем! Вход в систему успешно выполнен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+                cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t    Поздравляем! Вход в систему успешно выполнен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
                 check = true;
             }
             else
             {
-                cout << "\n Извините, введенные данные неверны! Попробуйте еще раз \n > ";
+                cout << "\n Введенные данные неверны! Попробуйте еще раз \n > ";
                 check = false;
+                Sleep(2000);
+                system("cls");
             }
         } while (!check);
     }
@@ -367,4 +373,11 @@ public:
 int main()
 {
     setlocale(LC_ALL, "rus");
+    Admin a;
+    /*a.registration();
+    AdminFileOperations ao;
+    ao.adminRecord(a);*/
+    AdminFileOperations ao;
+    ao.adminLoad(a);
+    a.login();
 }
