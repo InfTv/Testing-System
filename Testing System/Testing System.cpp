@@ -232,6 +232,8 @@ public:
             if (verification != password)
             {
                 cout << " Пароли не совпадают! Повторите попытку:\n > ";
+                Sleep(2000);
+                system("cls");
             }
         } while (verification != password);
         Sleep(1000);
@@ -268,6 +270,40 @@ public:
         }
         system("cls");
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t    Все готово к запуску!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+    }
+    void login()
+    {
+        Sleep(1000);
+        cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Здравствуйте!\n";
+        Sleep(2000);
+        cout << "\t\t\t\t\t\t    Вход в систему\n";
+        Sleep(3000);
+        system("cls");
+
+        bool check;
+        do
+        {
+            cout << "\n    Пожалуйста, введите Ваш логин: \n > ";
+            string userCheck;
+            getline(cin, userCheck);
+            cout << "    Отлично! А теперь введите пароль \n > ";
+            string passwordCheck;
+            getline(cin, passwordCheck);
+            Sleep(1000);
+
+            if (userCheck == user && passwordCheck == password)
+            {
+                cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t    Поздравляем! Вход в систему успешно выполнен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+                check = true;
+            }
+            else
+            {
+                cout << "\n Введенные данные неверны! Попробуйте еще раз \n > ";
+                check = false;
+                Sleep(2000);
+                system("cls");
+            }
+        } while (!check);
     }
 };
 
@@ -374,10 +410,9 @@ int main()
 {
     setlocale(LC_ALL, "rus");
     Admin a;
-    /*a.registration();
+    a.registration();
     AdminFileOperations ao;
-    ao.adminRecord(a);*/
-    AdminFileOperations ao;
-    ao.adminLoad(a);
-    a.login();
+    ao.adminRecord(a);
+    /*ao.guestLoad(a);
+    a.login();*/
 }
