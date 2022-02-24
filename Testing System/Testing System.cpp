@@ -62,7 +62,7 @@ public:
                 getline(cin, password);
                 if (password.length() < 8)
                 {
-                    cout << " Пароль не может содержать менее 8 символов! Повторите попытку:\n > ";
+                    cout << " Пароль не может содержать менее 8 символов! Повторите попытку:\n";
                     check = false;
                 }
             } while (!check);
@@ -72,31 +72,35 @@ public:
 
             if (verification != password)
             {
-                cout << " Пароли не совпадают! Повторите попытку:\n > ";
+                cout << " Пароли не совпадают! Повторите попытку:\n";
                 Sleep(2000);
                 system("cls");
+                cout << "\n    Введите пароль, который будет содержать не менее 8 символов:\n > ";
             }
         } while (verification != password);
         Sleep(1000);
         system("cls");
 
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t    Поздравляем, регистрация пройдена успешно!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+        Sleep(2000);
+        system("cls");
     }
     void login()
     {
         Sleep(1000);
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Здравствуйте!\n";
         Sleep(2000);
-        cout << "\t\t\t\t\t\t    Вход в систему\n";
+        cout << "\t\t\t\t\t\t   Вход в систему\n";
         Sleep(3000);
         system("cls");
 
         bool check;
         do
         {
-            cout << "\n    Пожалуйста, введите Ваш логин: \n > ";
+            cout << "    Пожалуйста, введите Ваш логин: \n > ";
             string userCheck;
             getline(cin, userCheck);
+            Sleep(1000);
             cout << "    Отлично! А теперь введите пароль \n > ";
             string passwordCheck;
             getline(cin, passwordCheck);
@@ -104,17 +108,128 @@ public:
 
             if (userCheck == user && passwordCheck == password)
             {
+                system("cls");
                 cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t    Поздравляем! Вход в систему успешно выполнен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
                 check = true;
+                Sleep(2000);
+                system("cls");
             }
             else
             {
-                cout << "\n Введенные данные неверны! Попробуйте еще раз \n > ";
+                cout << "\n Введенные данные неверны! Попробуйте еще раз: \n";
                 check = false;
                 Sleep(2000);
                 system("cls");
             }
         } while (!check);
+    }
+    void changeData()
+    {
+        int choose;
+        bool isCorrect = false;
+        do
+        {
+            cout << "    Пожалуйста, выберите данные, которые хотите изменить:\n";
+            cout << "    1 - логин; 2 - пароль\n > ";
+            cin >> choose;
+            cin.ignore();
+            Sleep(1000);
+            system("cls");
+
+            switch (choose)
+            {
+            case 1:
+            {
+                cout << "    Хорошо! Введите новый логин:\n > ";
+                string newUser;
+                bool correct = true;
+
+                do
+                {
+                    getline(cin, newUser);
+                    Sleep(1000);
+                    correct = true;
+
+                    if (newUser == user)
+                    {
+                        cout << " Старый и новый логины не могут совпадать! Повторите попытку:\n";
+                        Sleep(2000);
+                        system("cls");
+                        cout << "    Введите новый логин:\n > ";
+                        correct = false;
+                    }
+                } while (!correct);
+
+                user = newUser;
+                Sleep(1000);
+                system("cls");
+                cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t             Отлично! Логин успешно изменен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+                Sleep(2000);
+                system("cls");
+                isCorrect = true;
+                break;
+            }
+            case 2:
+            {
+                cout << "    Хорошо! Для начала введите старый пароль:\n > ";
+                isCorrect = true;
+
+                bool verify = true;
+                string oldPassword;
+                do
+                {
+                    getline(cin, oldPassword);
+                    Sleep(1000);
+                    verify = true;
+
+                    if (oldPassword != password)
+                    {
+                        cout << " Пароли не совпадают! Повторите попытку:\n";
+                        Sleep(2000);
+                        system("cls");
+                        cout << "    Введите свой старый пароль:\n > ";
+                        verify = false;
+                    }
+                } while (!verify);
+
+                cout << "    Хорошо, а теперь введите новый пароль, который будет содержать не менее 8 символов:\n > ";
+                string newPassword;
+
+                bool equal = false;
+                do
+                {
+                    getline(cin, newPassword);
+                    Sleep(1000);
+                    equal = false;
+
+                    if (oldPassword == newPassword)
+                    {
+                        cout << " Старый и новый пароли не могут совпадать! Повторите попытку:\n";
+                        Sleep(2000);
+                        system("cls");
+                        cout << "    Введите новый пароль:\n > ";
+                        equal = true;
+                    }
+                } while (equal);
+
+                password = newPassword;
+                Sleep(1000);
+                system("cls");
+                cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t             Отлично! Пароль успешно изменен!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+                Sleep(2000);
+                system("cls");
+                isCorrect = true;
+                break;
+            }
+            default:
+            {
+                cout << " Вы ввели некорректный параметр! Попробуйте еще раз:\n";
+                Sleep(2000);
+                system("cls");
+                break;
+            }
+            }
+        } while (!isCorrect);
     }
 };
 
@@ -190,25 +305,64 @@ public:
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Здравствуйте!";
         Sleep(2000);
         cout << "\n\t\t\t\t\t   Это Ваш первый вход в систему";
+        /*cout << "\n\t\t\t\t\t\t   Вход в систему";*/
         Sleep(3000);
         system("cls");
-        cout << "\n    Пожалуйста, придумайте логин, который будет состоять не менее чем из 4 символов:\n > ";
+
+        bool userVerification = false;
         do
         {
-            getline(cin, user);
-            for (int i = 0; i < user.length(); i++)
+            cout << "    Пожалуйста, придумайте логин, который будет состоять не менее чем из 4 символов:\n > ";
+            do
             {
-                if (user[i] == ' ')
+                getline(cin, user);
+                if (user.length() < 4)
                 {
-                    cout << " Логин не может содержать специальные символы! Повторите попытку:\n > ";
+                    cout << " Логин не может содержать менее 4 символов! Повторите попытку:\n";
+                    cout << " Введите логин, который будет состоять не менне чем из 4 символов:\n > ";
+                }
+            } while (user.length() < 4);
+            Sleep(500);
+            userVerification = true;
+
+            ifstream finReg("guestReg.bin", ios_base::binary);
+            ifstream finSize("guestSize.txt");
+
+            int userSize;
+            char userVerify[50];
+
+            if (finSize.tellg() != 0)
+            {
+                while (!finSize.eof())
+                {
+                    char skip[50];
+                    int skipSize;
+                    finSize >> userSize;
+                    finSize >> skipSize;
+                    finReg.read(userVerify, userSize);
+                    finReg.read(skip, skipSize);
+                    userVerify[userSize] = '\0';
+
+                    if (strcmp(user.c_str(), userVerify) == 0)
+                    {
+                        cout << " Пользователь с таким логином уже зарегистрирован!\n";
+                        Sleep(1000);
+                        cout << " Попробуйте еще раз:\n";
+                        Sleep(1000);
+                        system("cls");
+                        break;
+                    }
+                    else
+                    {
+                        userVerification = true;
+                    }
                 }
             }
-            if (user.length() < 4)
-            {
-                cout << " Логин не может содержать менее 4 символов! Повторите попытку:\n > ";
-            }
-        } while (user.length() < 4);
-        Sleep(500);
+
+            finReg.close();
+            finSize.close();
+
+        } while (!userVerification);
 
         cout << "    Отлично! А теперь придумайте пароль, который будет содержать не менее 8 символов:\n > ";
         string verification;
@@ -231,9 +385,10 @@ public:
 
             if (verification != password)
             {
-                cout << " Пароли не совпадают! Повторите попытку:\n > ";
+                cout << " Пароли не совпадают! Повторите попытку:\n";
                 Sleep(2000);
                 system("cls");
+                cout << "    Введите пароль, который будет содержать не менее 8 символов:\n > ";
             }
         } while (verification != password);
         Sleep(1000);
@@ -252,9 +407,13 @@ public:
         do
         {
             getline(cin, phone);
+            check = true;
             if (phone.length() != 13)
             {
-                cout << " Вы ввели некорректный номер телефона! Повторите попытку:\n > ";
+                cout << " Вы ввели некорректный номер телефона! Повторите попытку:\n";
+                Sleep(2000);
+                system("cls");
+                cout << "   Введите Ваш номер телефона: \n > ";
                 check = false;
             }
         } while (!check);
@@ -270,13 +429,15 @@ public:
         }
         system("cls");
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t    Все готово к запуску!\n\n\n\n\n\n\n\n\n\n\n\n\n";
+        Sleep(2000);
+        system("cls");
     }
     void login()
     {
         Sleep(1000);
         cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\t\t    Здравствуйте!\n";
         Sleep(2000);
-        cout << "\t\t\t\t\t\t    Вход в систему\n";
+        cout << "\t\t\t\t\t\t   Вход в систему\n";
         Sleep(3000);
         system("cls");
 
@@ -286,6 +447,7 @@ public:
             cout << "\n    Пожалуйста, введите Ваш логин: \n > ";
             string userCheck;
             getline(cin, userCheck);
+            Sleep(1000);
             cout << "    Отлично! А теперь введите пароль \n > ";
             string passwordCheck;
             getline(cin, passwordCheck);
@@ -298,7 +460,7 @@ public:
             }
             else
             {
-                cout << "\n Введенные данные неверны! Попробуйте еще раз \n > ";
+                cout << "\n Введенные данные неверны! Попробуйте еще раз \n";
                 check = false;
                 Sleep(2000);
                 system("cls");
@@ -307,23 +469,24 @@ public:
     }
 };
 
-class AdminFileOperations
+// Admin File Operations
+class AdminFO
 {
 public:
-    const void adminRecord(Admin& a)
+    const void record(Admin& a)
     {
         ofstream fout("adminReg.bin", ios_base::binary);
         ofstream foutsize("adminSize.txt");
 
         foutsize << a.getUser().size() << endl;
-        foutsize << a.getPassword().size();
+        foutsize << a.getPassword().size() << endl;
         fout.write(a.getUser().c_str(), a.getUser().size());
         fout.write(a.getPassword().c_str(), a.getPassword().size());
 
         foutsize.close();
         fout.close();
     }
-    void adminLoad(Admin& a)
+    void load(Admin& a)
     {
         ifstream fin("adminReg.bin", ios_base::binary);
         ifstream finsize("adminSize.txt");
@@ -343,20 +506,20 @@ public:
         a.setPassword(password);
     }
 };
-
-class GuestFileOperations
+// Guest File Operations
+class GuestFO
 {
 public:
-    const void guestRecord(Guest& g)
+    const void record(Guest& g)
     {
-        ofstream foutReg("guestReg.bin", ios_base::binary);
-        ofstream foutSize("guestSize.txt");
-        ofstream foutContacts("guestContacts.txt");
+        ofstream foutReg("guestReg.bin", ios_base::binary | ios_base::app);
+        ofstream foutSize("guestSize.txt", ios_base::app);
+        ofstream foutContacts("guestContacts.txt", ios_base::app);
 
         foutSize << g.getUser().size() << endl;
         foutSize << g.getPassword().size() << endl;
-        foutReg.write(g.getUser().c_str(), g.getUser().size());
-        foutReg.write(g.getPassword().c_str(), g.getPassword().size());
+        foutReg.write((char*)g.getUser().c_str(), g.getUser().size());
+        foutReg.write((char*)g.getPassword().c_str(), g.getPassword().size());
         foutContacts << g.getFirtsName() << endl;
         foutContacts << g.getSecondName() << endl;
         foutContacts << g.getLastName() << endl;
@@ -367,7 +530,7 @@ public:
         foutSize.close();
         foutContacts.close();
     }
-    void guestLoad(Guest& g)
+    void load(Guest& g)
     {
         ifstream finReg("guestReg.bin", ios_base::binary);
         ifstream finSize("guestSize.txt");
@@ -404,15 +567,24 @@ public:
         g.setPhone(phone);
         g.setAddress(address);
     }
+    void clearData()
+    {
+        ofstream foutReg("guestReg.bin", ios_base::binary);
+        ofstream foutSize("guestSize.txt", ios_base::out);
+        ofstream foutContacts("guestContacts.txt", ios_base::out);
+    }
 };
 
 int main()
 {
     setlocale(LC_ALL, "rus");
     Admin a;
-    a.registration();
-    AdminFileOperations ao;
-    ao.adminRecord(a);
-    /*ao.guestLoad(a);
-    a.login();*/
+    //a.registration();
+    AdminFO ao;
+    //ao.record(a);
+    ao.load(a);
+    a.login();
+    //a.login(); 
+    //a.changeData();
+    //ao.record(a);
 }
